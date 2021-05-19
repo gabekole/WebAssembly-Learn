@@ -1,0 +1,2 @@
+jsSpeed();
+wasmSpeed();
