@@ -2,8 +2,8 @@ async function init() {
 	const codePromise = fetch('./control.wasm');
 	const { instance } = await WebAssembly.instantiateStreaming(codePromise);
 
-	const width = 600;
-	const height = 600;
+	const width = instance.exports.getWidth();
+	const height = instance.exports.getHeight();
 
 	const canvas = document.getElementById("demo-canvas");
 	canvas.width = width;
@@ -23,7 +23,7 @@ async function init() {
 
 	const ctx = canvas.getContext("2d");
 
-	instance.exports.go();
+	instance.exports.draw();
 
 	ctx.putImageData(image, 0, 0);
 }
