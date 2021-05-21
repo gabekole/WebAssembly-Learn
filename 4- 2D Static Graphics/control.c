@@ -1,17 +1,16 @@
 #include <math.h>
+#include <stdlib.h>
 
-const unsigned int WIDTH = 600;
-const unsigned int HEIGHT = 600;
-unsigned int BUFFER[WIDTH * HEIGHT];
+unsigned int WIDTH = 600;
+unsigned int HEIGHT = 600;
+unsigned int *BUFFER;
 
-int getWidth(){
-	return WIDTH;
-}
-int getHeight(){
-	return HEIGHT;
-}
 
-const unsigned int* getBuffer(){
+const unsigned int* initBuffer(int width, int height){
+	WIDTH = width;
+	HEIGHT = height;
+	BUFFER = malloc(sizeof(unsigned int) * WIDTH * HEIGHT);
+	
 	return BUFFER;
 }
 
@@ -25,6 +24,8 @@ void set(unsigned int color) {
 }
 
 void addPixel(int x, int y, unsigned int color){
+	if((WIDTH*y + x) >= WIDTH*HEIGHT || (WIDTH*y + x) < 0)
+		return;
 	BUFFER[WIDTH*y + x] = color;
 }
 
@@ -45,6 +46,7 @@ void drawLine(int x1, int y1, int x2, int y2, unsigned int color){
 
 		do{
 			addPixel(round(x), round(y), color);
+			
 			x += dx;
 			y += dy;
 		} while((int)y != y2);
