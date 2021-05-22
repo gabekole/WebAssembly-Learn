@@ -73,7 +73,6 @@ void drawLine(int x1, int y1, int x2, int y2, unsigned int color){
 
 void matrixMultiply(int r1, int c1, double array1[][c1], int r2, int c2, double array2[][c2], double res[r1][c2]){
 	if(c1 != r2){
-		printf("Matrices do not match\n");
 		return;
 	}
 	
