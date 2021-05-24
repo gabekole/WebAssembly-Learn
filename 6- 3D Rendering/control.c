@@ -53,8 +53,9 @@ void set(unsigned int color) {
 }
 
 void addPixel(int x, int y, unsigned int color){
-	if((WIDTH*y + x) >= WIDTH*HEIGHT || (WIDTH*y + x) < 0)
+	if(x >= WIDTH || y >= HEIGHT || (WIDTH*y + x) >= WIDTH*HEIGHT || (WIDTH*y + x) < 0){
 		return;
+	}
 	BUFFER[WIDTH*y + x] = color;
 }
 
@@ -73,12 +74,12 @@ void drawLine(int x1, int y1, int x2, int y2, unsigned int color){
 
 		dx = dy*m;
 
-		do{
+		while(round(y) != y2){
 			addPixel(round(x), round(y), color);
 			
 			x += dx;
 			y += dy;
-		} while((int)y != y2);
+		}
 		addPixel(round(x), round(y), color);
 	}
 	else{
@@ -90,11 +91,11 @@ void drawLine(int x1, int y1, int x2, int y2, unsigned int color){
 
 		dy = dx*m;
 
-		do{
+		while(round(x) != x2){
 			addPixel(round(x), round(y), color);
 			x += dx;
 			y += dy;	
-		}while((int)x != x2);
+		}
 		addPixel(round(x), round(y), color);
 	}
 }
@@ -163,6 +164,7 @@ void rotateY(double theta){
 	apply(3, 3, matrix);
 }
 
+
 void project(){
 	for(int i = 0; i < pointNum; i++){
 		matrixMultiply(3, 3, orthprojection, 3, 1, points[i], projection[i]);
@@ -174,18 +176,19 @@ void draw(){
 	
 	project();
 	
+	int factor = 300;
 	for(int i = 0; i < 3; i++){
-		drawLine((int)(400*projection[i][0][0])+(WIDTH/2), (int)(400*projection[i][1][0])+(HEIGHT/2), (int)(400*projection[i+1][0][0])+(WIDTH/2), (int)(400*projection[i+1][1][0]+(HEIGHT/2)), 0xffff0000);
+		drawLine((int)(factor*projection[i][0][0])+(WIDTH/2), (int)(factor*projection[i][1][0])+(HEIGHT/2), (int)(factor*projection[i+1][0][0])+(WIDTH/2), (int)(factor*projection[i+1][1][0]+(HEIGHT/2)), 0xffff0000);
 	}
-	drawLine((int)(400*projection[3][0][0])+(WIDTH/2), (int)(400*projection[3][1][0])+(HEIGHT/2), (int)(400*projection[0][0][0])+(WIDTH/2), (int)(400*projection[0][1][0]+(HEIGHT/2)), 0xffff0000);
+	drawLine((int)(factor*projection[3][0][0])+(WIDTH/2), (int)(factor*projection[3][1][0])+(HEIGHT/2), (int)(factor*projection[0][0][0])+(WIDTH/2), (int)(factor*projection[0][1][0]+(HEIGHT/2)), 0xffff0000);
 	
 	for(int i = 4; i < 7; i++){
-		drawLine((int)(400*projection[i][0][0])+(WIDTH/2), (int)(400*projection[i][1][0])+(HEIGHT/2), (int)(400*projection[i+1][0][0])+(WIDTH/2), (int)(400*projection[i+1][1][0]+(HEIGHT/2)), 0xffff0000);
+		drawLine((int)(factor*projection[i][0][0])+(WIDTH/2), (int)(factor*projection[i][1][0])+(HEIGHT/2), (int)(factor*projection[i+1][0][0])+(WIDTH/2), (int)(factor*projection[i+1][1][0]+(HEIGHT/2)), 0xffff0000);
 	}
-	drawLine((int)(400*projection[7][0][0])+(WIDTH/2), (int)(400*projection[7][1][0])+(HEIGHT/2), (int)(400*projection[4][0][0])+(WIDTH/2), (int)(400*projection[4][1][0]+(HEIGHT/2)), 0xffff0000);
+	drawLine((int)(factor*projection[7][0][0])+(WIDTH/2), (int)(factor*projection[7][1][0])+(HEIGHT/2), (int)(factor*projection[4][0][0])+(WIDTH/2), (int)(factor*projection[4][1][0]+(HEIGHT/2)), 0xffff0000);
 	
 	
 	for(int i = 0; i < 4; i++){
-		drawLine((int)(400*projection[i][0][0])+(WIDTH/2), (int)(400*projection[i][1][0])+(HEIGHT/2), (int)(400*projection[i+4][0][0])+(WIDTH/2), (int)(400*projection[i+4][1][0]+(HEIGHT/2)), 0xffff0000);
+		drawLine((int)(factor*projection[i][0][0])+(WIDTH/2), (int)(factor*projection[i][1][0])+(HEIGHT/2), (int)(factor*projection[i+4][0][0])+(WIDTH/2), (int)(factor*projection[i+4][1][0]+(HEIGHT/2)), 0xffff0000);
 	}
 }

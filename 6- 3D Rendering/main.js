@@ -2,8 +2,8 @@ async function init() {
 	const codePromise = fetch('./control.wasm');
 	const { instance } = await WebAssembly.instantiateStreaming(codePromise);
 
-	const width = 1000;
-	const height = 800;
+	const width = 600;
+	const height = 600;
 
 	const canvas = document.getElementById("demo-canvas");
 	canvas.width = width;
@@ -22,15 +22,19 @@ async function init() {
 	const ctx = canvas.getContext("2d");
 
 	let set = color => instance.exports.set(color);
-	let update = () => ctx.putImageData(image, 0, 0);
+	let update = () => {
+		ctx.putImageData(image, 0, 0);
+	}
 	let drawPixel = (x, y, color) => instance.exports.addPixel(x, y, color);
 	let drawLine = (x1, y1, x2, y2, color) => instance.exports.drawLine(x1, y1, x2, y2, color);
 	
+	console.log(instance.exports);
+	
 	while(true){
-		await sleep(50);
+		await sleep(30);
 		update();
-		instance.exports.rotateX(.05);
 		instance.exports.rotateY(.05);
+		instance.exports.rotateX(.05);
 		instance.exports.rotateZ(.05);
 		instance.exports.draw();
 	}
