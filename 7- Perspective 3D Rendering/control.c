@@ -50,43 +50,70 @@ void addPixel(int x, int y, unsigned int color){
 }
 
 void drawLine(int x1, int y1, int x2, int y2, unsigned int color){
-
-	double dx, dy;
-	double y = y1;
-	double x = x1;
+	int rise = y2-y1;
+	int run = x2-x1;
 	
-	if(x2-x1 == 0 || fabs((y2-y1)/((double)(x2-x1))) > 1){
-		double m = (x2-x1)/((double)(y2-y1));	
-		if(y1 > y2)
-			dy = -1;
-		else
-			dy = 1;
-
-		dx = dy*m;
-
-		while(round(y) != y2){
-			addPixel(round(x), round(y), color);
-			
-			x += dx;
-			y += dy;
+	if(run == 0){
+		if(y2 < y1){
+			int temp = y1;
+			y1 = y2;
+			y2 = temp;
 		}
-		addPixel(round(x), round(y), color);
+		for (int y = y1; y <= y2; y++){
+			addPixel(x1, y, color);
+		}
 	}
 	else{
-		double m = (y2-y1)/((double)(x2-x1));
-		if(x1 > x2)
-			dx = -1;
-		else
-			dx = 1;
-
-		dy = dx*m;
-
-		while(round(x) != x2){
-			addPixel(round(x), round(y), color);
-			x += dx;
-			y += dy;	
+		double m = ((double)rise)/run;
+		int adjust = 1;
+		if ( m < 0 )
+			adjust = -1;
+			
+		int offset = 0;
+		
+		if ( m <=1 && m >= -1) {
+			
+			int delta = abs(rise)*2;
+			int threshold = abs(run);
+			int thresholdInc = abs(run)*2;
+			
+			int y = y1;
+			if ( x2 < x1 ){
+				int temp = x1;
+				x1 = x2;
+				x2 = temp;
+				y = y2;
+			}
+			for(int x = x1; x <= x2; x++){
+				addPixel(x, y, color);
+				offset += delta;
+				if( offset >= threshold ) {
+						y += adjust;
+						threshold += thresholdInc;
+				}
+			}
 		}
-		addPixel(round(x), round(y), color);
+		else {
+			int delta = abs(run)*2;
+			int threshold = abs(rise);
+			int thresholdInc = abs(rise)*2;
+			
+			int x = x1;
+			if(y2 < y1){
+				int temp = y1;
+				y1 = y2;
+				y2 = temp;
+				x = x2;
+			}
+			for(int y = y1; y <= y2; y++){
+				addPixel(x, y, color);
+				offset += delta;
+				if(offset >= threshold){
+					x += adjust;
+					threshold += thresholdInc;
+				}
+			}
+		}
 	}
 }
 

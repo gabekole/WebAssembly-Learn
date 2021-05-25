@@ -31,11 +31,11 @@ async function init() {
 	console.log(instance.exports);
 	
 	while(true){
-		await sleep(30);
+		await sleep(10);
 		update();
-		instance.exports.rotateY(.05);
-		instance.exports.rotateZ(.05);
-		instance.exports.rotateX(.05);
+		instance.exports.rotateY(.01);
+		instance.exports.rotateZ(.01);
+		instance.exports.rotateX(.01);
 		instance.exports.draw();
 	}
 }
