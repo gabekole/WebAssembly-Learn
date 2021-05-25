@@ -26,15 +26,6 @@ double points[pointNum][3][1] =
 
 double projection[pointNum][3][1];
 
-
-double orthprojection[3][3] = 
-{
-	{1, 0, 0},
-	{0, 1, 0},
-	{0, 0, 0},
-};
-
-
 const unsigned int* initBuffer(int width, int height){
 	WIDTH = width;
 	HEIGHT = height;
