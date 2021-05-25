@@ -1,6 +1,5 @@
 #include <math.h>
 #include <stdlib.h>
-#include <unistd.h>
 
 #define pointNum 8
 #define distance 1.5
