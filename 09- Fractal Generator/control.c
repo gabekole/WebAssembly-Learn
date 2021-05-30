@@ -6,6 +6,11 @@ unsigned int WIDTH = 800;
 unsigned int HEIGHT = 800;
 unsigned int *BUFFER;
 
+double deltaAngle = .9;
+double lFactor = .67;
+double orientation = 0;
+int ypos = 500;
+
 
 const unsigned int* initBuffer(int width, int height){
 	WIDTH = width;
@@ -111,7 +116,12 @@ void drawFractalRec(double x, double y, double angleOffset, double angleInc, int
 	drawFractalRec(x + sin(angleOffset-angleInc)*length, y- cos(angleOffset-angleInc)*length, angleOffset-angleInc, angleInc, lengthFactor*length, lengthFactor, color);
 }
 
-void drawFractal(double angleInc, double lengthFactor, unsigned int color){
+void drawFractal(double angleInc, int y1, double lengthFactor, double direction, unsigned int color){
+	deltaAngle = (angleInc > 0)?angleInc:deltaAngle;
+	lFactor = (lengthFactor >0)?lengthFactor:lFactor;
+	orientation = (direction >= 0)?direction:orientation;
+	ypos = (y1 >= 0)?y1:ypos;
+	
 	set(0xffffffff);
-	drawFractalRec(WIDTH/2, HEIGHT-300, 0, angleInc, 200, lengthFactor, color);
+	drawFractalRec(WIDTH/2, ypos, orientation, deltaAngle, 200, lFactor, color);
 }

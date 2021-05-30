@@ -11,7 +11,10 @@
 	</head>
 
 	<body>
-		<input type="range" min="0" max="157" value="45" class="slider" id="angleRange" oninput="{inst.exports.set(0xffffffff);drawFractal(this.value/50.0, .6, 0xff000000);update();}"><br>
+		<input type="range" min="0" max="157" value="45" class="slider" id="angleRange" oninput="{drawFractal(this.value/50.0, -1, -1, -1, 0xff000000);update();}"><br>
+		<input type="range" min="0" max="70" value="60" class="slider" id="lengthFactor" oninput="{drawFractal(-1, -1, this.value/100.0, -1, 0xff000000);update();}"><br>
+		<input type="range" min="0" max="157" value="0" class="slider" id="direction" oninput="{drawFractal(-1, -1, -1, this.value/50.0, 0xff000000);update();}"><br>
+		<input type="range" min="0" max="1000" value="500" class="slider" id="y" oninput="{drawFractal(-1, this.value, -1, -1, 0xff000000);update();}"><br>
 		<canvas id="demo-canvas"></canvas>
 	</body>
 </html>

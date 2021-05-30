@@ -12,8 +12,8 @@ async function init() {
 	const { instance } = await WebAssembly.instantiateStreaming(codePromise);
 	inst = instance;
 
-	const width = 1200;
-	const height = 800;
+	const width = 1400;
+	const height = 1000;
 
 	const canvas = document.getElementById("demo-canvas");
 	canvas.width = width;
@@ -31,9 +31,9 @@ async function init() {
 	const ctx = canvas.getContext("2d");
 
 	update = () => ctx.putImageData(image, 0, 0);
-	drawFractal = (angleIncrement, lengthFactor, color) => instance.exports.drawFractal(angleIncrement, lengthFactor, color);
+	drawFractal = (angleIncrement, y, lengthFactor, direction, color) => instance.exports.drawFractal(angleIncrement, y, lengthFactor, direction, color);
 	
-	drawFractal(.9, .6, 0xff000000);
+	drawFractal(.9, 500, .6, 0, 0xff000000);
 	update();
 }
 
