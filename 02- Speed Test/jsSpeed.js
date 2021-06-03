@@ -8,7 +8,6 @@ async function jsSpeed(){
 
 	let end = new Date().getTime();
 	let time = (end-start);
-	console.log(result);
 	
 	document.getElementById("result2").textContent = time + " milliseconds";
 }

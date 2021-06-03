@@ -8,7 +8,6 @@ async function wasmSpeed(){
 
 	let end = new Date().getTime();
 	let time = (end-start);
-  console.log(result);
 
 	document.getElementById("result1").textContent = time + " milliseconds";
 }
