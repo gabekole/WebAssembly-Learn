@@ -28,7 +28,7 @@ async function init() {
 	let addDensity = (x, y, amount) => instance.exports.addDensity(x, y, amount);
 	let addVelocity = (x, y, amtX, amtY) => instance.exports.addVelocity(x, y, amtX, amtY);
 	
-	instance.exports.create(width, 10, 1, .000005);
+	instance.exports.create(width, 1, 1, .000001);
 	
 	
 	let loop = async () => {
@@ -37,23 +37,27 @@ async function init() {
 		while(true){
 			let amp = 50000;
 			
-			addDensity(32, 32, 1);
-			addDensity(31, 32, 1);
-			addDensity(33, 32, 1);
-			addDensity(32, 31, 1);
-			addDensity(32, 33, 1);
+			addDensity(32, 32, .2);
+			addDensity(33, 32, .2);
+			addDensity(32, 33, .2);
+			addDensity(33, 33, .2);
+			addDensity(31, 32, .2);
+			addDensity(31, 33, .2);
 			
 			addVelocity(32, 32, Math.cos(angle)*amp, Math.sin(angle)*amp);
-			addVelocity(31, 32, Math.cos(angle)*amp, Math.sin(angle)*amp);
-			addVelocity(33, 32, Math.cos(angle)*amp, Math.sin(angle)*amp);
-			addVelocity(32, 31, Math.cos(angle)*amp, Math.sin(angle)*amp);
 			addVelocity(32, 33, Math.cos(angle)*amp, Math.sin(angle)*amp);
+			addVelocity(33, 32, Math.cos(angle)*amp, Math.sin(angle)*amp);
+			addVelocity(33, 33, Math.cos(angle)*amp, Math.sin(angle)*amp);
+			addVelocity(31, 32, Math.cos(angle)*amp, Math.sin(angle)*amp);
+			addVelocity(31, 33, Math.cos(angle)*amp, Math.sin(angle)*amp);
+			
+			
 			
 			instance.exports.step();
 			instance.exports.renderD();
 			update();
-			angle += .1;
-			await sleep(100);
+			angle += .02;
+			await sleep(20);
 		}
 	}
 	loop();
