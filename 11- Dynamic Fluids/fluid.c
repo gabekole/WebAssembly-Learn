@@ -265,7 +265,7 @@ void renderD(){
 		for(int x = 0; x < N; x++){
 			unsigned int gradient = rgba(255, 0, 0, 255 * cube->density[IX(x, y)]);
 			
-			addPixel(x, y, gradient);
+			fillSquare(x*8, y*8, 8, gradient);
 		}
 	}
 }

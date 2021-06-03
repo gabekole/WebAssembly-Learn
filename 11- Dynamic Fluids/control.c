@@ -102,3 +102,11 @@ void drawLine(int x1, int y1, int x2, int y2, unsigned int color){
 		}
 	}
 }
+
+void fillSquare(int x0, int y0, int width, unsigned int color){
+	for(int y = y0; y < width+y0; y++){
+		for(int x = x0; x < width+x0; x++){
+			addPixel(x, y, color);
+		}
+	}		
+}

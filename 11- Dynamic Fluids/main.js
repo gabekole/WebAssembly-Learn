@@ -6,8 +6,8 @@ async function init() {
 	const codePromise = fetch('./control.wasm');
 	const { instance } = await WebAssembly.instantiateStreaming(codePromise);
 
-	const width = 64;
-	const height = 64;
+	const width = 512;
+	const height = 512;
 
 	const canvas = document.getElementById("demo-canvas");
 	canvas.width = width;
@@ -28,7 +28,7 @@ async function init() {
 	let addDensity = (x, y, amount) => instance.exports.addDensity(x, y, amount);
 	let addVelocity = (x, y, amtX, amtY) => instance.exports.addVelocity(x, y, amtX, amtY);
 	
-	instance.exports.create(width, 1, 1, .000001);
+	instance.exports.create(64, 1, 1, .000001);
 	
 	
 	let loop = async () => {
