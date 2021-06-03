@@ -256,6 +256,8 @@ unsigned int rgba(unsigned char r, unsigned char g, unsigned char b, unsigned ch
 	return (a<<24) | (b<<16) | (g<<8) | r;
 }
 
+
+
 void renderD(){
 	
 	int N = cube->size;
@@ -263,7 +265,11 @@ void renderD(){
 	
 	for(int y = 0; y < N; y++){
 		for(int x = 0; x < N; x++){
-			unsigned int gradient = rgba(255, 0, 0, 255 * cube->density[IX(x, y)]);
+			double temp = cube->density[IX(x, y)];
+			if(temp > 1)
+				temp = 1;
+			
+			unsigned int gradient = rgba(255, 0, 0, 255 * temp);
 			
 			fillSquare(x*8, y*8, 8, gradient);
 		}

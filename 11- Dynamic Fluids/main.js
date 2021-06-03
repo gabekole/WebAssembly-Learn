@@ -28,35 +28,49 @@ async function init() {
 	let addDensity = (x, y, amount) => instance.exports.addDensity(x, y, amount);
 	let addVelocity = (x, y, amtX, amtY) => instance.exports.addVelocity(x, y, amtX, amtY);
 	
-	instance.exports.create(64, 1, 1, .000001);
+	instance.exports.create(64, 1, 5, .000001);
 	
 	
 	let loop = async () => {
 		let angle = 0;
+		let inc = .05;
 		
 		while(true){
 			let amp = 50000;
 			
 			addDensity(32, 32, .2);
 			addDensity(33, 32, .2);
+			addDensity(31, 32, .2);
 			addDensity(32, 33, .2);
 			addDensity(33, 33, .2);
-			addDensity(31, 32, .2);
 			addDensity(31, 33, .2);
+			addDensity(32, 31, .2);
+			addDensity(33, 31, .2);
+			addDensity(31, 31, .2);
 			
 			addVelocity(32, 32, Math.cos(angle)*amp, Math.sin(angle)*amp);
-			addVelocity(32, 33, Math.cos(angle)*amp, Math.sin(angle)*amp);
 			addVelocity(33, 32, Math.cos(angle)*amp, Math.sin(angle)*amp);
-			addVelocity(33, 33, Math.cos(angle)*amp, Math.sin(angle)*amp);
 			addVelocity(31, 32, Math.cos(angle)*amp, Math.sin(angle)*amp);
+			addVelocity(33, 33, Math.cos(angle)*amp, Math.sin(angle)*amp);
+			addVelocity(32, 33, Math.cos(angle)*amp, Math.sin(angle)*amp);
 			addVelocity(31, 33, Math.cos(angle)*amp, Math.sin(angle)*amp);
+			addVelocity(33, 31, Math.cos(angle)*amp, Math.sin(angle)*amp);
+			addVelocity(32, 31, Math.cos(angle)*amp, Math.sin(angle)*amp);
+			addVelocity(31, 31, Math.cos(angle)*amp, Math.sin(angle)*amp);
 			
 			
 			
 			instance.exports.step();
 			instance.exports.renderD();
 			update();
-			angle += .02;
+			angle += inc;
+			
+			let rand = Math.random();
+			if(rand > .99){
+				inc = -inc;
+				console.log(inc);
+			}
+				
 			await sleep(20);
 		}
 	}
