@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 #define pointNum 8
-#define distance 1.5
+#define distance 3
 
 unsigned int WIDTH = 600;
 unsigned int HEIGHT = 600;
