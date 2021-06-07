@@ -161,5 +161,5 @@ void drawProjectile(double angle, double velocity, double gravity, double time){
 	double y = vy * time - (gravity*time*time / 2);
 	int meter = 50;
 
-	fillCircle(WIDTH/12 + round(x*meter), HEIGHT/2-(round(y*meter)), 10, 0xff000000);
+	fillCircle(WIDTH/12 + round(x*meter), HEIGHT/2-(round(y*meter)) - 9, 20, 0xff000000);
 }
