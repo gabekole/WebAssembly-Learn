@@ -48,6 +48,8 @@ async function init() {
 		
 		while(current - begin <= timeToComplete*1000){
 			await sleep(20);
+			instance.exports.set(0xffffffff);
+			drawFloor();
 			instance.exports.drawProjectile(angle, velocity, gravity, (current - begin)/1000.0);
 			update();
 			current = performance.now();
