@@ -127,11 +127,39 @@ void drawCircle(int mx, int my, int radius, unsigned int color){
 	}
 }
 
+void fillCircle(int mx, int my, int radius, unsigned int color){
+	int x = 0;
+	int y = radius;
+	double d = 1.25 - radius;
+	
+	drawLine(mx - radius, my, mx + radius, my, color);
+	while(x <= y)
+	{
+		if(d < 0)
+		{
+			d = d + 2 * x + 3;
+			x += 1;
+		}
+		else
+		{
+			d = d + 2 * (x-y) + 5;
+			x += 1;
+			y -= 1;
+		}
+		drawLine(mx - x, my + y, mx + x, my + y, color);
+		drawLine(mx - x, my - y, mx + x, my - y, color);
+		
+		drawLine(mx - y, my - x, mx + y, my - x, color);
+		drawLine(mx - y, my + x, mx + y, my + x, color);
+	}
+}
+
+
 void drawProjectile(double angle, double velocity, double gravity, double time){
 	double x = cos(angle) * velocity * time; 	
 	double vy = sin(angle) * velocity;
 	double y = vy * time - (gravity*time*time / 2);
 	int meter = 50;
 
-	drawCircle(WIDTH/12 + round(x*meter), HEIGHT/2-(round(y*meter)), 10, 0xff000000);
+	fillCircle(WIDTH/12 + round(x*meter), HEIGHT/2-(round(y*meter)), 10, 0xff000000);
 }
