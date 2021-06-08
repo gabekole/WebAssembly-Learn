@@ -28,11 +28,10 @@ async function init() {
 	let addDensity = (x, y, amount) => instance.exports.addDensity(x, y, amount);
 	let addVelocity = (x, y, amtX, amtY) => instance.exports.addVelocity(x, y, amtX, amtY);
 	
-	instance.exports.create(64, 1, 5, .000001);
+	instance.exports.create(64, 1, 2, .000001);
 	
-	
+	let angle = 0;
 	let loop = async () => {
-		let angle = 0;
 		let inc = .05;
 		
 		while(true){
@@ -76,7 +75,11 @@ async function init() {
 	}
 	loop();
 	
+	const range = document.getElementById("angleRange");
+	range.oninput = () => {
+		angle = range.value / 100.0;
+	};
 	
-}
 
+}
 init();

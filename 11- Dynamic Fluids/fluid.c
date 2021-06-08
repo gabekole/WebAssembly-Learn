@@ -269,7 +269,7 @@ void renderD(){
 			if(temp > 1)
 				temp = 1;
 			
-			unsigned int gradient = rgba(255, 0, 0, 255 * temp);
+			unsigned int gradient = rgba(0, 0, 255, 255 * temp);
 			
 			fillSquare(x*8, y*8, 8, gradient);
 		}
