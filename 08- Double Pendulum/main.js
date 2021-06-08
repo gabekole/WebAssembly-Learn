@@ -20,17 +20,24 @@ async function init() {
 	);
 	const ctx = canvas.getContext("2d");
 
-	let set = color => instance.exports.set(color);
 	let update = () => ctx.putImageData(image, 0, 0);
-	let drawPixel = (x, y, color) => instance.exports.addPixel(x, y, color);
-	let drawLine = (x1, y1, x2, y2, color) => instance.exports.drawLine(x1, y1, x2, y2, color);
 	let draw = () => instance.exports.draw();
 	
+	async function loop() {
+		while(true){
+			await sleep(10);
+			update();
+			draw();
+		}
+	}
+	loop();
 	
-	while(true){
-		await sleep(10);
-		update();
-		draw();
+	const a1 = document.getElementById("angle1");
+	const a2 = document.getElementById("angle2");
+	const setter = document.getElementById("setter");
+	
+	setter.onclick = () => {
+		instance.exports.setAngle(a1.value/100, a2.value/100);
 	}
 }
 

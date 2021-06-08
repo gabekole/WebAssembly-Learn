@@ -9,7 +9,7 @@ unsigned int *BUFFER;
 
 //center
 int cx = 400;
-int cy = 350;
+int cy = 150;
 
 //mass and length of rod and bob
 double r1 = 200;
@@ -126,6 +126,9 @@ void drawCircle(int mx, int my, int radius, unsigned int color){
 	int x = 0;
 	int y = radius;
 	double d = 1.25 - radius;
+	
+	addPixel(mx - radius, my, color);
+	addPixel(mx + radius, my, color);
 	while(x < y)
 	{
 		if(d < 0)
@@ -173,6 +176,17 @@ void calculateAcceleration(){
 	double denominator2 = r2*(2*m1 + m2 - m2*cos(2*a1 - 2*a2));
 	
 	aa2 = numerator2/denominator2;
+}
+
+void setAngle(double angle1, double angle2){
+	aa1 = 0;
+	aa2 = 0;
+	
+	av1 = 0;
+	av2 = 0;
+	
+	a1 = angle1;
+	a2 = angle2;
 }
 
 void draw(){
