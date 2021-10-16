@@ -28,7 +28,7 @@ async function init() {
 	let addDensity = (x, y, amount) => instance.exports.addDensity(x, y, amount);
 	let addVelocity = (x, y, amtX, amtY) => instance.exports.addVelocity(x, y, amtX, amtY);
 	
-	instance.exports.create(256, 2, 2, .000001);
+	instance.exports.create(64, 2, 2, .000001);
 	
 	let angle = 0;
 	let loop = async () => {
